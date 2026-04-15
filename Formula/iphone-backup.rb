@@ -8,30 +8,23 @@ class IphoneBackup < Formula
 
   depends_on "rust" => :build
   depends_on "libimobiledevice"
-  depends_on "jq"
   depends_on :macos
 
   def install
-    system "cargo", "install", *std_cargo_args
-    (prefix/"scripts").install "scripts/setup.sh"
-    (prefix/"scripts").install "scripts/restore.sh"
-    (prefix/"config").install "config/com.user.iphone-backup.plist"
+    system "cargo", "build", "--release"
+    bin.install "target/release/iphone-backup"
   end
 
   def caveats
     <<~EOS
-      To load the launchd agent (runs backup daily at 2 am):
-        cp #{prefix}/config/com.user.iphone-backup.plist ~/Library/LaunchAgents/
-        launchctl load ~/Library/LaunchAgents/com.user.iphone-backup.plist
+      Run `iphone-backup` to launch the TUI.
 
-      To pair your iPhone via USB (run once per device):
-        bash #{prefix}/scripts/setup.sh
+      From the Services tab you can:
+        [i] install and load the launchd agent (daily backup at 2am)
+        [p] pair your iPhone via USB
+        [e] change the backup path
 
-      To restore a backup:
-        bash #{prefix}/scripts/restore.sh
-
-      Config file: ~/.config/iphone-backup/config.toml
-        backup_path = "~/Backups/iOS"   # or an SMB mount like /Volumes/ios-backups
+      Config: ~/.config/iphone-backup/config.toml
     EOS
   end
 
