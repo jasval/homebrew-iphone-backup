@@ -1,8 +1,8 @@
 class IphoneBackup < Formula
   desc "Automated iPhone/iPad backup manager with a Ratatui TUI, scheduled via launchd"
   homepage "https://github.com/jasval/iphone-backup"
-  url "https://github.com/jasval/iphone-backup/archive/refs/tags/v1.1.0.tar.gz"
-  sha256 "da065a303d8107ec535b41ff3473b8a847afae7fd13e2e4c640855d2b9f16b75"
+  url "https://github.com/jasval/iphone-backup/archive/refs/tags/v1.2.0.tar.gz"
+  sha256 "e3006f13b1b4ad9c83ea7b95516ba501e242d7a2973ec8606e21c97608c09bb9"
   license "MIT"
   head "https://github.com/jasval/iphone-backup.git", branch: "main"
 
